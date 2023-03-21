@@ -2,15 +2,15 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 export const Quiz = (navigation) => {
-    const [dataQuiz, setDataQuiz] = useState([])
+    const [dataQuiz, setDataQuiz] = useState()
 
     useEffect(() => {
         axios.get(`http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/quiz/23`).then((response) => {
             setDataQuiz(response.data)
-
         })
     }, [])
 
+    if (!dataQuiz) return null;
 
     return (
         <div>

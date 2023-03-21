@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const Home = () => {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState()
     useEffect(() => {
         axios.get('http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/posts').then((response) => {
             console.log(data)
@@ -12,6 +12,7 @@ export const Home = () => {
         })
     }, [])
 
+    if (!data) return null;
     return (
 
         <div className="App">
