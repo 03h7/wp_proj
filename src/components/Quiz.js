@@ -41,9 +41,12 @@ export const Quiz = () => {
                 </label>)
             )}
 
-            <NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}>Fin de quiz</NavLink>
+            {
+                !dataQuiz.acf.numeropage ? (<NavLink to={`/pages/`}>Fin de quiz</NavLink>
+                ) : (<NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}>Quiz Suivant</NavLink>)
+            }
 
-            <NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}>Quiz Suivant</NavLink>
+
         </div>
 
 
