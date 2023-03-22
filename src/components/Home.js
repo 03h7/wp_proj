@@ -2,40 +2,29 @@ import {useEffect, useState} from "react";
 import axios from 'axios';
 
 export const Home = () => {
+    const [dataPages, setDataPages] = useState();
 
-    const [data, setData] = useState()
     useEffect(() => {
-        axios.get('http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/pages').then((response) => {
-            console.log(data)
-            setData(response.data[0])
-
+        axios.get('http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/pages/11?acf_format=standard').then((response) => {
+            setDataPages(response.data);
         })
     }, [])
 
-    if (!data) return null;
+    if (!dataPages) return null;
     return (
-
         <div className="App">
             <header className="">
-
-                <title>{data.title.rendered}</title>
-                <p>{data.title.rendered}
-                </p>
-                <a
-                    className="App-link"
-                    href={data.guid.rendered}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Page 1
-                </a>
+                <h1>Title : {dataPages.title.rendered}</h1>
             </header>
 
-            <body>
-            <p>{data.content.rendered}</p>
-            </body>
+            <p>Description : {dataPages.acf.description}</p>
+
+            <p>Corps : {dataPages.acf.corps}</p>
+
+            {dataPages.acf.image.map((item, index) => (
+                <img className={`img_${index}`} key={index} src={item} alt="img"></img>
+            ))}
 
         </div>
-
     )
 }
