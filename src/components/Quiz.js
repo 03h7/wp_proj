@@ -1,16 +1,24 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
 
 export const Quiz = () => {
     const [dataQuiz, setDataQuiz] = useState()
-    let navigate = useNavigate()
+
+    const [checkedItem, setCheckedItem] = useState();
+    const {id} = useParams();
+    let url = useLocation();
+    const navigate = useNavigate();
+    const handleCheckboxChange = (event) => {
+        setCheckedItem(parseInt(event.target.value));
+    };
+
     useEffect(() => {
-        axios.get(`http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/quiz/23`).then((response) => {
+        axios.get(`http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/quiz/${id}`).then((response) => {
             setDataQuiz(response.data)
+
         })
-    }, [])
-    //faire pages avec articles, rubtriques
+    }, [url])
 
     if (!dataQuiz) return null;
 
@@ -18,14 +26,27 @@ export const Quiz = () => {
         <div>
 
             <div> {dataQuiz.acf.question}</div>
-            {dataQuiz.acf.reponses.map((value) => <button
-                key={value.reponse} value={value.reponse}>{value.reponse}</button>)}
 
 
-            <button onClick={() => navigate(Quiz)}>Suivant</button>
+            {dataQuiz.acf.reponses.map(item => (
+                <label key={item.reponse}>
+                    <input
+                        type="checkbox"
+                        name={item.id}
+                        value={item.id}
+                        checked={checkedItem === item.id}
+                        onChange={handleCheckboxChange}
+                    />
+                    {item.reponse}
+                </label>)
+            )}
 
+            <NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}>Fin de quiz</NavLink>
+
+            <NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}>Quiz Suivant</NavLink>
         </div>
 
 
     )
 }
+

@@ -5,7 +5,7 @@ export const Home = () => {
 
     const [data, setData] = useState()
     useEffect(() => {
-        axios.get('http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/posts').then((response) => {
+        axios.get('http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/pages').then((response) => {
             console.log(data)
             setData(response.data[0])
 
