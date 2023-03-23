@@ -5,7 +5,7 @@ import {Quiz} from "./components/Quiz";
 import {Page} from "./components/Page";
 
 function App() {
-
+    const v = ``
     return (
         <BrowserRouter>
             <Routes>
