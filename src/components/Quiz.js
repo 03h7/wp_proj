@@ -1,56 +1,61 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {NavLink, useLocation, useNavigate, useParams} from "react-router-dom";
+import {NavLink, useLocation, useParams} from "react-router-dom";
+import '../styles/Quiz.css'
+import pho from '../assets/pho.jpg'
+import Countdown from "./Countdown";
 
 export const Quiz = () => {
-    const [dataQuiz, setDataQuiz] = useState()
+    const [dataQuiz, setDataQuiz] = useState();
 
     const [checkedItem, setCheckedItem] = useState();
     const {id} = useParams();
     let url = useLocation();
-    const navigate = useNavigate();
+
     const handleCheckboxChange = (event) => {
         setCheckedItem(parseInt(event.target.value));
     };
 
     useEffect(() => {
         axios.get(`http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/quiz/${id}`).then((response) => {
-            setDataQuiz(response.data)
-
+            setDataQuiz(response.data);
         })
     }, [url])
 
     if (!dataQuiz) return null;
 
     return (
-        <div>
+        <div className="container">
+            {/* <img className="img" src={pho}></img> */}
+            <h1>Question {dataQuiz.acf.numquestionpage}</h1>
 
-            <div> {dataQuiz.acf.question}</div>
+        <div className="currQuest">
+            <p className="question"> {dataQuiz.acf.question}</p>
+            <Countdown />
 
-
+            <div className="allAnswers">
             {dataQuiz.acf.reponses.map(item => (
                 <label key={item.reponse}>
                     <input
+                        className="answer"
                         type="checkbox"
                         name={item.id}
                         value={item.id}
                         checked={checkedItem === item.id}
                         onChange={handleCheckboxChange}
                     />
-                    {item.reponse}
+                    <span className="labelText">{item.reponse}</span>
+                    <br></br>
                 </label>)
             )}
-
+            </div>
+            <div className="nextButton">
             {
-                !dataQuiz.acf.numeropage ? (<NavLink to={`/pages/`}>Fin de quiz</NavLink>
-                ) : (<NavLink to={`/quiz/${dataQuiz.acf.numeropage}`} onClick={() => setCheckedItem(null)}>Quiz
-                    Suivant</NavLink>)
+                !dataQuiz.acf.numeropage ? (<NavLink to={`/result`}>Résultats</NavLink>) : (<NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}><p className="nextButtonInner"> Question suivante </p></NavLink>)
             }
-
-
+            </div>
+            </div>
         </div>
-
-
     )
 }
 
