@@ -43,8 +43,7 @@ export const Quiz = () => {
 
             {
                 !dataQuiz.acf.numeropage ? (<NavLink to={`/pages/`}>Fin de quiz</NavLink>
-                ) : (<NavLink to={`/quiz/${dataQuiz.acf.numeropage}`} onClick={() => setCheckedItem(null)}>Quiz
-                    Suivant</NavLink>)
+                ) : (<NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}>Quiz Suivant</NavLink>)
             }
 
 
