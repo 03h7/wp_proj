@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import '../styles/Page.css'
 import ReactModal from 'react-modal';
-import bean from '../assets/images/bean.jpg'; // Importez votre image en utilisant le chemin d'accès correct
 
 const customStyles = {
     overlay: {}
@@ -25,7 +24,7 @@ export const Article = ({articleNumber}) => {
 
     useEffect(() => {
         if (articleNumber) {
-            axios.get(`http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/posts/${articleNumber}`).then((response) => {
+            axios.get(`http://g4.esiee-it.o3creative.fr/wp-json/wp/v2/posts/${articleNumber}?acf_format=standard`).then((response) => {
                 setArticle(response.data)
             })
         }
@@ -36,10 +35,12 @@ export const Article = ({articleNumber}) => {
     return (
         <div className={"ArticleContainer"}>
 
-            <img className={"ImageContainer"} src={bean} height={189} width={261}/>
+            <img className={"ImageContainer"} src={article.acf.image[0]} height={189} width={261}/>
             <div className={"TextContainer"}>
                 <h2 className={"ArticleTitle"}>{article.acf.titre}</h2>
-                <p className={"ArticleDescriptionText"}>{article.acf.description}</p>
+                <div className={"ArticleDescriptionText"}
+                     dangerouslySetInnerHTML={{__html: article.acf.description}}></div>
+
                 <p className={"MoreButton"} onClick={handleOpenModal}>En savoir plus</p>
 
                 <ReactModal
@@ -80,9 +81,9 @@ export const Article = ({articleNumber}) => {
                 >
                     <div className={"ModalContainer"}>
                         <h1 className={"ModalTitleText"}>{article.acf.titre}</h1>
-                        <img className={"ModalContainerImage"} src={bean}/>
+                        <img className={"ModalContainerImage"} src={article.acf.image[0]}/>
                         <p>{article.acf.description}</p>
-
+                        <div dangerouslySetInnerHTML={{__html: article.acf.corps}}></div>
                         <button className={"ButtonModal"} onClick={handleCloseModal}>Fermer</button>
                     </div>
 

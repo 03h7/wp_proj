@@ -19,7 +19,8 @@ export const Page = () => {
         <h1 className={"PageTitleText"}>{
             page.acf.titre
         }</h1>
-        <p className={"PageTitleText"}>
+        
+        <p>
             {page.acf.description}
         </p>
         <p>
