@@ -1,35 +1,26 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import ArticleStyles from '../styles/Article.css';
+import '../styles/Page.css'
+import ReactModal from 'react-modal';
+import bean from '../assets/images/bean.jpg'; // Importez votre image en utilisant le chemin d'accès correct
 
-const Modal = (props) => {
-    function handleCloseModal() {
-        props.onClose();
-    }
-
-    return (
-        <div>
-            <div className="modal-background" onClick={handleCloseModal}/>
-            <div className="modal">
-                {/* Contenu de la modale */}
-                {props.children}
-                <button onClick={handleCloseModal}>Fermer la modale</button>
-            </div>
-        </div>
-    );
-
+const customStyles = {
+    overlay: {}
 };
 
 export const Article = ({articleNumber}) => {
     const [article, setArticle] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
-    function handleOpenModal() {
-        setModalOpen(true);
+    const handleOpenModal = () => {
+        setShowModal(true);
+        console.log(showModal)
+
     }
 
-    function handleCloseModal() {
-        setModalOpen(false);
+    const handleCloseModal = () => {
+        setShowModal(false);
+        console.log(showModal)
     }
 
     useEffect(() => {
@@ -43,13 +34,62 @@ export const Article = ({articleNumber}) => {
 
 
     return (
-        <div onClick={handleOpenModal} className={ArticleStyles.ArticleContainer}>
-            <h2>{article.acf.titre}</h2>
-            {modalOpen && (
-                <Modal onClose={handleCloseModal}>
-                    <div>dvbrfbfbf</div>
-                </Modal>
-            )}
+        <div className={"ArticleContainer"}>
+
+            <img className={"ImageContainer"} src={bean} height={189} width={261}/>
+            <div className={"TextContainer"}>
+                <h2 className={"ArticleTitle"}>{article.acf.titre}</h2>
+                <p className={"ArticleDescriptionText"}>{article.acf.description}</p>
+                <p className={"MoreButton"} onClick={handleOpenModal}>En savoir plus</p>
+
+                <ReactModal
+
+                    isOpen={showModal}
+                    onRequestClose={handleCloseModal}
+                    style={{
+                        overlay: {
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)' // Fond noir transparent avec une opacité de 50%
+
+                        },
+                        content: {
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            right: '40px',
+                            bottom: '40px',
+                            border: '1px solid #ccc',
+                            background: '#fff',
+                            overflow: 'auto',
+                            WebkitOverflowScrolling: 'touch',
+                            borderRadius: '4px',
+                            outline: 'none',
+                            padding: '20px',
+                            width: '80%',
+                            height: '80%'
+                        }
+                    }}
+
+                    contentLabel="Article"
+
+                >
+                    <div className={"ModalContainer"}>
+                        <h1 className={"ModalTitleText"}>{article.acf.titre}</h1>
+                        <img className={"ModalContainerImage"} src={bean}/>
+                        <p>{article.acf.description}</p>
+
+                        <button className={"ButtonModal"} onClick={handleCloseModal}>Fermer</button>
+                    </div>
+
+                </ReactModal>
+            </div>
+
+
         </div>
 
     )

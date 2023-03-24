@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import {Article} from "./Article";
+import "../styles/Page.css"
 
 export const Page = () => {
     const {id} = useParams();
@@ -15,11 +16,21 @@ export const Page = () => {
     if (!page) return null;
     return (
         <body>
-        <h1>Mon titre principal</h1>
-        <img src="" alt="Image de page BEAN"/>
-        {
-            page.acf.articles.map((article) => <Article articleNumber={article.lienarticle}/>)
-        }
+        <h1 className={"PageTitleText"}>{
+            page.acf.titre
+        }</h1>
+        <p className={"PageTitleText"}>
+            {page.acf.description}
+        </p>
+        <p>
+            {page.acf.corps}
+        </p>
+
+        <div className={"ArticlesPageContainer"}>
+            {
+                page.acf.articles.map((article) => <Article articleNumber={article.lienarticle}/>)
+            }
+        </div>
 
 
         </body>
