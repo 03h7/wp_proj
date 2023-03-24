@@ -1,63 +1,96 @@
 * {
-  --theme-bg: #d1dbcca3;
-  --header-bg: #520001;
+    --theme-bg: #d1dbcca3;
+    --header-bg: #520001;
 }
 
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 body {
-  background-color: var(--theme-bg);
+    background-color: var(--theme-bg);
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8F8F8F;
-  border-radius: 2px;
+    background: #8F8F8F;
+    border-radius: 2px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #1F1F1F;
+    background: #1F1F1F;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #707070;
+    background: #707070;
 }
+
+.logoaccueil {
+    width: 20%;
+    height: 20%;
+    text-align: center;
+    margin: 0 -3%;
+}
+
+.headerClass {
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10%;
+}
+
+.corps {
+    margin: 0 10%;
+    text-align: justify;
+}
+
+header > ul {
+    list-style: none;
+    display: flex;
+    margin: unset;
+}
+
+header > ul > li:first-child {
+    margin-right: 20px;
+}
+
+
+
