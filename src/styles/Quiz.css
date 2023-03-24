@@ -1,0 +1,120 @@
+:root {
+    --textColor: rgb(67, 55, 55);
+    --backColor: rgb(249, 248, 245);
+}
+
+#root {
+    background-color: #d1dbcc;
+    opacity: 1;
+}
+
+html {
+    background-color: #d1dbcc;
+    opacity: 1;
+}
+
+* {
+    color: var(--textColor);
+    text-align: center;
+}
+
+.container {
+    background-color: rgb(241, 239, 233);
+    display: inline-block;
+    border-radius: 50px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.currQuest {
+    border-radius: 10px;
+}
+
+body {
+    background-color: var(--backColor);
+}
+
+h1, .question, .nextButton {
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0px 0px 0px;
+}
+
+.question {
+    margin: 20px 0px 20px 0px;
+    font-size: 50px;
+}
+
+.allAnswers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+}
+
+.nextButton {
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+.nextButton a {
+    text-decoration: underline;
+}
+
+.nextButtonInner:click {
+}
+
+.img {
+    border-radius: 0px 30% 0px 0px;
+    position: absolute;
+    z-index: -1;
+    opacity: 20%;
+    width: 100%;
+    height: 100%;
+}
+
+.labelText {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var(--backColor);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.answer {
+    display: none;
+}
+
+.answer:checked ~ .labelText {
+    background-color: rgb(129, 200, 129);
+    animation: 0.2s checkboxAnim
+}
+
+.countdown {
+    font-size: 50px;
+    animation: countdownAnim 1s infinite;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+@keyframes checkboxAnim {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 100;
+    }
+}
+
+@keyframes countdownAnim {
+    0% {
+        color: inherit;
+    }
+    100% {
+        color: rgb(233, 62, 62);
+    }
+}
