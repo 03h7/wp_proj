@@ -15,25 +15,21 @@ export const Page = () => {
 
     if (!page) return null;
     return (
-        <body>
-        <h1 className={"PageTitleText"}>{
-            page.acf.titre
-        }</h1>
-        
-        <p>
-            {page.acf.description}
-        </p>
-        <p>
-            {page.acf.corps}
-        </p>
+      <body>
+        <header className="HeaderPage">
+          <h1 className={"PageTitleText"}>{page.acf.titre}</h1>
+        </header>
 
-        <div className={"ArticlesPageContainer"}>
-            {
-                page.acf.articles.map((article) => <Article articleNumber={article.lienarticle}/>)
-            }
-        </div>
+        <section className="CorpsPage">
+          <p className="TexteDescription">{page.acf.description}</p>
+          <p>{page.acf.corps}</p>
 
-
-        </body>
-    )
+          <div className={"ArticlesPageContainer"}>
+            {page.acf.articles.map((article) => (
+              <Article articleNumber={article.lienarticle} />
+            ))}
+          </div>
+        </section>
+      </body>
+    );
 }
