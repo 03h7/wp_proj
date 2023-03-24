@@ -4,16 +4,28 @@ import {NavLink, useLocation, useParams} from "react-router-dom";
 import '../styles/Quiz.css'
 import pho from '../assets/pho.jpg'
 import Countdown from "./Countdown";
+import '../styles/Quiz.css'
+import food from '../assets/pho.jpg'
+
 
 export const Quiz = () => {
     const [dataQuiz, setDataQuiz] = useState();
-
-    const [checkedItem, setCheckedItem] = useState();
+    const [nbGoodAnswers, setNbGoodAnswers] = useState([])
+    const [checkedItem, setCheckedItem] = useState({});
     const {id} = useParams();
     let url = useLocation();
 
+    function addItem() {
+        if (checkedItem.answer == "true")
+            setNbGoodAnswers(nbGoodAnswers.concat(checkedItem.answer))
+    }
+
     const handleCheckboxChange = (event) => {
-        setCheckedItem(parseInt(event.target.value));
+
+        setCheckedItem({
+            id: parseInt(event.target.name), answer: (event.target.value)
+        });
+
     };
 
     useEffect(() => {
@@ -50,9 +62,13 @@ export const Quiz = () => {
             )}
             </div>
             <div className="nextButton">
-            {
-                !dataQuiz.acf.numeropage ? (<NavLink to={`/result`}>Résultats</NavLink>) : (<NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}><p className="nextButtonInner"> Question suivante </p></NavLink>)
-            }
+                {
+                    !dataQuiz.acf.numeropage ? (
+                        <NavLink to={`/result/${nbGoodAnswers.length + 1}`}>Résultats</NavLink>) : (
+                        <NavLink to={`/quiz/${dataQuiz.acf.numeropage}`}
+                                 onClick={() => addItem()}>Question
+                            suivante</NavLink>)
+                }
             </div>
             </div>
         </div>

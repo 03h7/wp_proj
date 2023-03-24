@@ -5,7 +5,7 @@ import {Home} from "./components/Home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Quiz} from "./components/Quiz";
 import {Page} from "./components/Page";
-import { QuizResults } from './components/QuizResults';
+import {QuizResults} from './components/QuizResults';
 
 function App() {
     const v = ``
@@ -15,7 +15,7 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/quiz/:id" element={<Quiz/>}/>
                 <Route path="/page/:id" element={<Page/>}></Route>
-                <Route path="/result" element={<QuizResults/>}></Route>
+                <Route path="/result/:nbGoodAnswers" element={<QuizResults/>}></Route>
             </Routes>
         </BrowserRouter>
     );
