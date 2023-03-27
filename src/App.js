@@ -8,7 +8,6 @@ import {Page} from "./components/Page";
 import {QuizResults} from './components/QuizResults';
 
 function App() {
-    const v = ``
     return (
         <BrowserRouter>
             <Routes>

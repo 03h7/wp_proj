@@ -13,8 +13,9 @@ export const Quiz = () => {
     let url = useLocation();
 
     function addItem() {
-        if (checkedItem.answer == "true")
+        if (checkedItem.answer === "true")
             setNbGoodAnswers(nbGoodAnswers.concat(checkedItem.answer))
+            setCheckedItem({})
     }
 
     const handleCheckboxChange = (event) => {
@@ -48,7 +49,7 @@ export const Quiz = () => {
                                 className="answer"
                                 type="checkbox"
                                 name={item.id}
-                                value={item.id}
+                                value={item.bonnereponse}
                                 checked={checkedItem.id === item.id}
                                 onChange={handleCheckboxChange}
                             />
